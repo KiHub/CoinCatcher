@@ -13,6 +13,8 @@ struct Crypto: Codable{
     let price_usd: Float?
     let id_icon: String?
     
+    
+    
 //    enum CodingKeys: String, CodingKey {
 //        case asset_id = "id"
 //        case name = "name"
@@ -22,4 +24,7 @@ struct Crypto: Codable{
     
 }
 
-
+struct Icon: Codable {
+    let asset_id: String
+    let url: String
+}

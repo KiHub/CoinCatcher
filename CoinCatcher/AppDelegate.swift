@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
            
            let navigationController = UINavigationController(rootViewController: ViewController())
            window?.rootViewController = navigationController
+           
+           APICaller.shared.getAllIcons()
                              
            return true
        }
