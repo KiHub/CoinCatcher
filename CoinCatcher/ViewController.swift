@@ -17,6 +17,15 @@ class ViewController: UIViewController {
     }()
     
     private var viewModels = [CryptoTableViewCellViewModel]()
+    
+    static let numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.locale = .current
+        formatter.allowsFloats = true
+        formatter.numberStyle = NumberFormatter.Style.currencyAccounting
+        formatter.formatterBehavior = .default
+        return formatter
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,9 +39,15 @@ class ViewController: UIViewController {
                 self?.viewModels = models.compactMap({
                     
                     // To Do: Formatter
+                    let price = $0.price_usd ?? 0
+                    let formatter = ViewController.numberFormatter
+                    let priceString = formatter.string(from: NSNumber(value: price))
                     
-                    CryptoTableViewCellViewModel(
-                        name: $0.name ?? "N/A", symbol: $0.asset_id ?? "N/A", price: "$55")
+                   return CryptoTableViewCellViewModel(
+                        name: $0.name ?? "N/A",
+                        symbol: $0.asset_id ?? "N/A",
+                        price: priceString ?? "N/A"
+                    )
                 })
                 
                 DispatchQueue.main.async {
